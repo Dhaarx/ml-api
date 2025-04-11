@@ -27,8 +27,6 @@ def predict_fertilizer():
 
     soil=data.get('soil')
     crop=data.get('crop')
-    # soil="sandy"
-    # crop="rice"
 
     try:
         soil_encode=le_soil.transform([soil])[0]
