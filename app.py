@@ -25,10 +25,10 @@ def favicon():
 def predict_fertilizer():
     data=request.get_json()
 
-    # soil=data.get('soil')
-    # crop=data.get('crop')
-    soil="sandy"
-    crop="rice"
+    soil=data.get('soil')
+    crop=data.get('crop')
+    # soil="sandy"
+    # crop="rice"
 
     try:
         soil_encode=le_soil.transform([soil])[0]
