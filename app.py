@@ -12,12 +12,23 @@ le_soil = pickle.load(open('soil_encoder.pkl', 'rb'))
 le_crop = pickle.load(open('crop_encoder.pkl', 'rb'))
 le_ferti = pickle.load(open('fertilizer_encoder.pkl', 'rb'))
 
+
+@app.route('/')
+def home():
+    return "Welcome to the Fertilizer Prediction API!"
+
+@app.route('/favicon.ico')
+def favicon():
+    return '', 204  # No content for favicon
+
 @app.route('/predict',methods=['POST'])
 def predict_fertilizer():
     data=request.get_json()
 
-    soil=data.get('soil')
-    crop=data.get('crop')
+    # soil=data.get('soil')
+    # crop=data.get('crop')
+    soil="sandy"
+    crop="rice"
 
     try:
         soil_encode=le_soil.transform([soil])[0]
@@ -28,9 +39,8 @@ def predict_fertilizer():
     pred_encoded=model.predict([[soil_encode,crop_encode]])[0]
     predicted_fertilizer=le_ferti.inverse_transform([pred_encoded])[0]
 
-    return jsonify({'fertilizer':predicted_fertilizer})
-
-
+    print(predicted_fertilizer)
+    return jsonify({'fertilizer': predicted_fertilizer})
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 10000))  
