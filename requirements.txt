@@ -1,3 +1,6 @@
 flask
 scikit-learn
 pandas
+os
+pickle
+warnings
