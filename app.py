@@ -2,9 +2,11 @@ import pickle
 from flask import Flask,request,jsonify
 import warnings
 import os
+from flask_cors import CORS
 warnings.filterwarnings('ignore')
 
 app = Flask(__name__)
+CORS(app)
 
 # Load model and encoders
 model = pickle.load(open('fertilizer_model.pkl', 'rb'))
